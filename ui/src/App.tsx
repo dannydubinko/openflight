@@ -365,7 +365,11 @@ function AppContent() {
         )}
         {currentView === 'stats' && <StatsView shots={shots} onClearSession={() => socketService.clearSession()} />}
         {currentView === 'shots' && (
-          <ShotList shots={shots} onDeleteShot={(timestamp) => socketService.deleteShot(timestamp)} />
+          <ShotList
+            shots={shots}
+            onDeleteShot={(timestamp) => socketService.deleteShot(timestamp)}
+            onClearSession={() => socketService.clearSession()}
+          />
         )}
         {currentView === 'camera' && (
           <CameraFeed

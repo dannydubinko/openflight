@@ -9,10 +9,12 @@ import { getEmptyValidationEntry, useValidationStore, type ValidationEntry } fro
 import type { UnitSystem } from '../utils/units';
 import { formatDistance, formatSpeed, getDistanceUnit } from '../utils/units';
 import './ShotList.css';
+import './StatsView.css';
 
 interface ShotListProps {
   shots: Shot[];
   onDeleteShot: (timestamp: string) => void;
+  onClearSession: () => void;
 }
 
 interface ShotRowProps {
@@ -231,7 +233,7 @@ const ShotRow = memo(function ShotRow({
   );
 });
 
-export function ShotList({ shots, onDeleteShot }: ShotListProps) {
+export function ShotList({ shots, onDeleteShot, onClearSession }: ShotListProps) {
   const { unitSystem } = useUnitPreference();
   const distanceUnit = getDistanceUnit(unitSystem);
   const { entries, updateEntry, removeEntry } = useValidationStore();
@@ -303,6 +305,9 @@ export function ShotList({ shots, onDeleteShot }: ShotListProps) {
           />
         ))}
       </div>
+      <button className='clear-button' onClick={onClearSession}>
+        Clear Session
+      </button>
     </div>
   );
 }
